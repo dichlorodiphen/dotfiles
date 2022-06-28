@@ -153,6 +153,7 @@ let g:ycm_auto_trigger = 1
 
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
+set t_Co=256
 " set background=dark
 colorscheme aurora
 
