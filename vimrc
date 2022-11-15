@@ -111,6 +111,9 @@ if has("autocmd")
 
     " Git commit wrapping
     autocmd FileType gitcommit setlocal tw=72
+
+    " Racket
+    autocmd filetypedetect BufReadPost *.rkt,*.rktl,*.rktd set filetype=scheme
 endif
 
 " Install vim-plug if not installed
@@ -139,7 +142,13 @@ Plug 'vimwiki/vimwiki'
 Plug 'cespare/vim-toml', { 'branch': 'main' }
 
 " coc
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" java syntax
+Plug 'uiiaoo/java-syntax.vim'
+
+" Neoformat
+Plug 'sbdchd/neoformat'
 
 call plug#end()
 
@@ -153,11 +162,18 @@ let g:ycm_auto_trigger = 1
 
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
-set t_Co=256
 " set background=dark
 colorscheme aurora
 
 " use markdown with vimwiki
 let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+      \ 'syntax': 'markdown', 'ext': '.md'}]
+
+" neoformat configuration
+autocmd BufWritePre *.ml Neoformat
+
+" OCaml
+:set rtp+=/Users/dichlorodiphen/.opam/4.14.0/share/merlin/vim
+
+
 
