@@ -126,11 +126,8 @@ endif
 " VIM-PLUG
 call plug#begin()
 
-" aurora theme
-Plug 'ray-x/aurora'
-
-" jellybeans theme
-Plug 'nanotech/jellybeans.vim'
+" molokai theme
+Plug 'tomasr/molokai'
 
 " vim-go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -144,33 +141,14 @@ Plug 'cespare/vim-toml', { 'branch': 'main' }
 " coc
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" java syntax
-Plug 'uiiaoo/java-syntax.vim'
-
-" Neoformat
-Plug 'sbdchd/neoformat'
-
 call plug#end()
 
-" YCM config
-let g:ycm_auto_trigger = 1
-
-" colorscheme
-" set termguicolors
-" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-
-let &t_ZH="\e[3m"
-let &t_ZR="\e[23m"
-" set background=dark
-colorscheme aurora
+set termguicolors
+colorscheme molokai
 
 " use markdown with vimwiki
 let g:vimwiki_list = [{'path': '~/vimwiki/',
       \ 'syntax': 'markdown', 'ext': '.md'}]
-
-" neoformat configuration
-autocmd BufWritePre *.ml Neoformat
 
 " OCaml
 :set rtp+=/Users/dichlorodiphen/.opam/4.14.0/share/merlin/vim
