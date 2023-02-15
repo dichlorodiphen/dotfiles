@@ -126,8 +126,8 @@ endif
 " VIM-PLUG
 call plug#begin()
 
-" molokai theme
-Plug 'tomasr/molokai'
+" papercolor theme
+Plug 'NLKNguyen/papercolor-theme'
 
 " vim-go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -143,8 +143,11 @@ Plug 'cespare/vim-toml', { 'branch': 'main' }
 
 call plug#end()
 
+" set up theme
 set termguicolors
-colorscheme molokai
+set background=dark
+
+colorscheme PaperColor
 
 " use markdown with vimwiki
 let g:vimwiki_list = [{'path': '~/vimwiki/',
