@@ -1,0 +1,68 @@
+# 270 = purple hue
+# #A156EC = purple
+# #AA8BC9 = light purple
+# #7C7781 = dark gray
+
+
+format = """
+$username\
+$hostname\
+$time\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$line_break\
+$python\
+$character"""
+
+[directory]
+style = "fg:#AA8BC9"
+
+[character]
+success_symbol = "[❯](#A156EC)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
+
+[git_branch]
+format = "[$branch]($style)"
+style = "fg:#7C7781"
+
+[git_status]
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+style = "cyan"
+conflicted = "​"
+untracked = "​"
+modified = "​"
+staged = "​"
+renamed = "​"
+deleted = "​"
+stashed = "≡"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "fg:#7C7781"
+
+[cmd_duration]
+format = "[$duration]($style) "
+style = "fg:#7C7781"
+
+[python]
+format = "[$virtualenv]($style) "
+style = "fg:#7C7781"
+
+[time]
+disabled = false
+use_12hr = true
+format = '[$time]($style) '
+style = "fg:#7C7781"
+utc_time_offset = '-5'
+
+#[shell]
+#disabled = false
+#unknown_indicator = "unknown-shell"
+#bash_indicator = "bash"
+#fish_indicator = "fish"
+#style = "fg:#7C7781"
+
