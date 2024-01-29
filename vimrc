@@ -20,6 +20,12 @@ set shortmess+=I
 " Show line numbers.
 set number
 
+" Wrap after end of word
+set linebreak
+
+" Increase cmd history length
+set history=200
+
 " This enables relative line numbering mode. With both number and
 " relativenumber enabled, the current line shows the true line number, while
 " all other lines (above and below) are numbered relative to the current line.
@@ -114,6 +120,9 @@ if has("autocmd")
 
     " Racket
     autocmd filetypedetect BufReadPost *.rkt,*.rktl,*.rktd set filetype=scheme
+
+    " transparent bg
+    autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 endif
 
 " Install vim-plug if not installed
@@ -146,6 +155,8 @@ call plug#end()
 " set up theme
 set termguicolors
 set background=dark
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
 
 colorscheme PaperColor
 
@@ -155,6 +166,4 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
 
 " OCaml
 :set rtp+=/Users/dichlorodiphen/.opam/4.14.0/share/merlin/vim
-
-
 
