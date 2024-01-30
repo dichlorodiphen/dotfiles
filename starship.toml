@@ -57,7 +57,7 @@ disabled = false
 use_12hr = true
 format = '[$time]($style) '
 style = "fg:#7C7781"
-utc_time_offset = '-5'
+utc_time_offset = '-8'
 
 #[shell]
 #disabled = false
