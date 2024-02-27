@@ -14,6 +14,9 @@ set nocompatible
 " Turn on syntax highlighting.
 syntax on
 
+" Use new regex engine to speed up syntax highlighting.
+set re=0
+
 " Disable the default Vim startup message.
 set shortmess+=I
 
