@@ -2,6 +2,9 @@
 # #A156EC = purple
 # #AA8BC9 = light purple
 # #7C7781 = dark gray
+# #7BAA7C = green
+
+
 
 
 format = """
@@ -16,6 +19,16 @@ $cmd_duration\
 $line_break\
 $python\
 $character"""
+
+[username]
+style_user = "fg:#7BAA7C"
+style_root = "fg:red"
+format = "[$user]($style) "
+
+[hostname]
+ssh_symbol = "🌐"
+format ="[$ssh_symbol]($style)"
+style = "fg:#7BAA7C"
 
 [directory]
 style = "fg:#AA8BC9"
@@ -57,7 +70,7 @@ disabled = false
 use_12hr = true
 format = '[$time]($style) '
 style = "fg:#7C7781"
-utc_time_offset = '-5'
+utc_time_offset = "-7"
 
 #[shell]
 #disabled = false
