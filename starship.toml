@@ -57,7 +57,7 @@ disabled = false
 use_12hr = true
 format = '[$time]($style) '
 style = "fg:#7C7781"
-utc_time_offset = '-8'
+utc_time_offset = '-5'
 
 #[shell]
 #disabled = false
@@ -65,4 +65,5 @@ utc_time_offset = '-8'
 #bash_indicator = "bash"
 #fish_indicator = "fish"
 #style = "fg:#7C7781"
+
 
