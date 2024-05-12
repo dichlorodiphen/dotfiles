@@ -150,8 +150,11 @@ Plug 'vimwiki/vimwiki'
 " TOML syntax highlighting
 Plug 'cespare/vim-toml', { 'branch': 'main' }
 
-" coc
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" nand2tetris syntax
+Plug 'sevko/vim-nand2tetris-syntax'
+
+" vim-ai
+" Plug 'madox2/vim-ai'
 
 call plug#end()
 
