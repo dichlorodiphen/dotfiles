@@ -182,7 +182,9 @@ call plug#end()
 
 " CONFIGURING FZF.VIM
 " Use fd for fzf
-let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow -E .git'
+" NOTE: I don't use fzf for anything other than vimwiki search right now. Must
+" set up a better system for ignores if I do.
+let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow -E .git -E backups -E "*.swp" -E .gitignore'
 " Search vimwiki
 function! VimwikiFzfSearch()
   let l:wiki_path = expand('$HOME/vimwiki')
