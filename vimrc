@@ -11,11 +11,23 @@
 " `vim -u foo`).
 set nocompatible
 
+" Go to tab by number
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<CR>
+
+" Create new tab
+noremap <leader>t :tabnew<CR>
+
 " Turn on syntax highlighting.
 syntax on
-
-" Use new regex engine to speed up syntax highlighting.
-set re=0
 
 " Disable the default Vim startup message.
 set shortmess+=I
@@ -153,10 +165,35 @@ Plug 'cespare/vim-toml', { 'branch': 'main' }
 " nand2tetris syntax
 Plug 'sevko/vim-nand2tetris-syntax'
 
+" neoformat (for ocamlformat)
+Plug 'sbdchd/neoformat'
+
+" fzf.vim
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" coc
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 " vim-ai
-" Plug 'madox2/vim-ai'
+Plug 'madox2/vim-ai'
 
 call plug#end()
+
+" CONFIGURING FZF.VIM
+" Use fd for fzf
+let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow -E .git'
+" Search vimwiki
+function! VimwikiFzfSearch()
+  let l:wiki_path = expand('$HOME/vimwiki')
+  call fzf#vim#files(l:wiki_path)
+endfunction
+command! VimwikiFzfSearch call VimwikiFzfSearch()
+nnoremap <leader>ws :VimwikiFzfSearch<CR>
+" Follow link in new tab
+nmap <leader>wt <Plug>VimwikiTabnewLink
+" disable <leader>ws in vimwiki
+" nmap <F15> <Plug>VimwikiUISelect
 
 " set up theme
 set termguicolors
@@ -171,5 +208,42 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
       \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " OCaml
-:set rtp+=/Users/dichlorodiphen/.opam/4.14.0/share/merlin/vim
+" :set rtp+=/Users/dichlorodiphen/.opam/4.14.0/share/merlin/vim
 
+" ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
+let s:opam_share_dir = system("opam config var share")
+let s:opam_share_dir = substitute(s:opam_share_dir, '[\r\n]*$', '', '')
+
+let s:opam_configuration = {}
+
+function! OpamConfOcpIndent()
+  execute "set rtp^=" . s:opam_share_dir . "/ocp-indent/vim"
+endfunction
+let s:opam_configuration['ocp-indent'] = function('OpamConfOcpIndent')
+
+function! OpamConfOcpIndex()
+  execute "set rtp+=" . s:opam_share_dir . "/ocp-index/vim"
+endfunction
+let s:opam_configuration['ocp-index'] = function('OpamConfOcpIndex')
+
+function! OpamConfMerlin()
+  let l:dir = s:opam_share_dir . "/merlin/vim"
+  execute "set rtp+=" . l:dir
+endfunction
+let s:opam_configuration['merlin'] = function('OpamConfMerlin')
+
+let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
+let s:opam_available_tools = []
+for tool in s:opam_packages
+  " Respect package order (merlin should be after ocp-index)
+  if isdirectory(s:opam_share_dir . "/" . tool)
+    call add(s:opam_available_tools, tool)
+    call s:opam_configuration[tool]()
+  endif
+endfor
+" ## end of OPAM user-setup addition for vim / base ## keep this line
+" ## added by OPAM user-setup for vim / ocp-indent ## 479a17575ac219cabc549d0acb50c0e8 ## you can edit, but keep this line
+if count(s:opam_available_tools,"ocp-indent") == 0
+  source "/Users/dichlorodiphen/.opam/default/share/ocp-indent/vim/indent/ocaml.vim"
+endif
+" ## end of OPAM user-setup addition for vim / ocp-indent ## keep this line
