@@ -23,6 +23,12 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<CR>
 
+" Use ctrl-[hjkl] to select the active split!
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
+
 " Create new tab
 noremap <leader>t :tabnew<CR>
 
@@ -172,11 +178,14 @@ Plug 'sbdchd/neoformat'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" calendar-vim
+Plug 'mattn/calendar-vim'
+
 " coc
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " vim-ai
-Plug 'madox2/vim-ai'
+" Plug 'madox2/vim-ai'
 
 call plug#end()
 
@@ -196,6 +205,21 @@ nnoremap <leader>ws :VimwikiFzfSearch<CR>
 nmap <leader>wt <Plug>VimwikiTabnewLink
 " disable <leader>ws in vimwiki
 " nmap <F15> <Plug>VimwikiUISelect
+
+" Shortcut for calendar
+nnoremap <leader>cc :Calendar<CR>
+" Shortcut for today in calendar
+function! OpenCalendarForToday()
+    let l:current_date = strftime('%Y-%m-%d')
+    let l:path_to_today = expand('$HOME/vimwiki/diary/') . l:current_date . '.md'
+    execute 'edit ' . l:path_to_today
+endfunction
+command! OpenCalendarForToday call OpenCalendarForToday()
+nnoremap <leader>ct :OpenCalendarForToday<CR>
+
+" Multiple vimwikis
+let g:vimwiki_list = [{'path': '~/vimwiki/personal/', 'syntax': 'markdown', 'ext': '.md'},
+      \ {'path': '~/vimwiki/work/', 'syntax': 'markdown', 'ext': '.md'}]
 
 " set up theme
 set termguicolors
