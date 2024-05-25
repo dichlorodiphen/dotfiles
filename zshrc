@@ -35,5 +35,8 @@ export PATH="$PATH:/opt/homebrew/opt/vim/bin/vim"
 export PATH="$PATH:/opt/apache-maven-3.9.6/bin"
 export PATH="$PATH:$HOME/bin"
 
+# superfile
+export EDITOR=vim
+
 # opam configuration
 [[ ! -r /Users/dichlorodiphen/.opam/opam-init/init.zsh ]] || source /Users/dichlorodiphen/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
