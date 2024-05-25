@@ -225,6 +225,9 @@ endfunction
 command! Spf call LaunchSuperfile()
 noremap <leader>spf :Spf<CR>
 
+noremap <C-j> :VimwikiToggleListItem<CR>
+inoremap <C-j> <C-o>:VimwikiToggleListItem<CR>
+
 " Multiple vimwikis
 let g:vimwiki_list = [{'path': '~/vimwiki/personal/', 'syntax': 'markdown', 'ext': '.md'},
       \ {'path': '~/vimwiki/work/', 'syntax': 'markdown', 'ext': '.md'}]
