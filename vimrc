@@ -219,7 +219,7 @@ nnoremap <leader>ct :OpenCalendarForToday<CR>
 
 " Superfile shortcut
 function! LaunchSuperfile()
-  silent execute '!spf'
+  silent execute '!spf ' . expand('%:p:h')
   redraw!
 endfunction
 command! Spf call LaunchSuperfile()
