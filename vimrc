@@ -185,7 +185,7 @@ Plug 'mattn/calendar-vim'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " vim-ai
-" Plug 'madox2/vim-ai'
+Plug 'madox2/vim-ai'
 
 call plug#end()
 
@@ -216,6 +216,14 @@ function! OpenCalendarForToday()
 endfunction
 command! OpenCalendarForToday call OpenCalendarForToday()
 nnoremap <leader>ct :OpenCalendarForToday<CR>
+
+" Superfile shortcut
+function! LaunchSuperfile()
+  silent execute '!spf'
+  redraw!
+endfunction
+command! Spf call LaunchSuperfile()
+noremap <leader>spf :Spf<CR>
 
 " Multiple vimwikis
 let g:vimwiki_list = [{'path': '~/vimwiki/personal/', 'syntax': 'markdown', 'ext': '.md'},
