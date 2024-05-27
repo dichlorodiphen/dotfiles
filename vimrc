@@ -141,9 +141,6 @@ if has("autocmd")
 
     " Racket
     autocmd filetypedetect BufReadPost *.rkt,*.rktl,*.rktd set filetype=scheme
-
-    " transparent bg
-    autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 endif
 
 " Install vim-plug if not installed
@@ -181,11 +178,11 @@ Plug 'junegunn/fzf.vim'
 " calendar-vim
 Plug 'mattn/calendar-vim'
 
-" coc
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" goyo
+Plug 'junegunn/goyo.vim'
 
 " vim-ai
-Plug 'madox2/vim-ai'
+" Plug 'madox2/vim-ai'
 
 call plug#end()
 
@@ -233,12 +230,14 @@ let g:vimwiki_list = [{'path': '~/vimwiki/personal/', 'syntax': 'markdown', 'ext
       \ {'path': '~/vimwiki/work/', 'syntax': 'markdown', 'ext': '.md'}]
 
 " set up theme
-set termguicolors
-set background=dark
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
-
+set termguicolors
+set background=dark
 colorscheme PaperColor
+
+" goyo shortcuts
+noremap <leader>gg :Goyo<CR>
 
 " use markdown with vimwiki
 let g:vimwiki_list = [{'path': '~/vimwiki/',
