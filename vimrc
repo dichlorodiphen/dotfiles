@@ -184,7 +184,13 @@ Plug 'junegunn/goyo.vim'
 " vim-ai
 " Plug 'madox2/vim-ai'
 
+" rust.vim
+Plug 'rust-lang/rust.vim'
+
 call plug#end()
+
+" CONFIGURING RUST.VIM
+let g:rustfmt_autosave = 1
 
 " CONFIGURING FZF.VIM
 " Use fd for fzf
@@ -224,6 +230,10 @@ noremap <leader>spf :Spf<CR>
 
 noremap <C-j> :VimwikiToggleListItem<CR>
 inoremap <C-j> <C-o>:VimwikiToggleListItem<CR>
+
+" zz shortcut
+inoremap <C-z> <C-o>zz
+noremap <C-z> zz
 
 " Multiple vimwikis
 let g:vimwiki_list = [{'path': '~/vimwiki/personal/', 'syntax': 'markdown', 'ext': '.md'},
