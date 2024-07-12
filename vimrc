@@ -23,6 +23,58 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<CR>
 
+" ------------------
+" coc-nvim
+" ------------------
+
+" May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
+" utf-8 byte sequence
+set encoding=utf-8
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" GoTo code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" ------------------
+
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
@@ -124,23 +176,22 @@ set smartindent
 set smarttab
 
 if has("autocmd")
-    " Makefile hard tabs
-    autocmd FileType make set noexpandtab softtabstop=0
-    
-    " Assembly NASM syntax
-    autocmd FileType asm set noexpandtab softtabstop=0 syntax=nasm
+  " Makefile hard tabs
+  autocmd FileType make set noexpandtab softtabstop=0
 
-    " Rust file detection
-    " autocmd BufNewFile,BufRead *.rs set filetype=rust
+  " Assembly NASM syntax
+  autocmd FileType asm set noexpandtab softtabstop=0 syntax=nasm
 
-    " Comment continuation in Java
-    autocmd FileType java,c,cpp setlocal comments-=:// comments+=f://
+  " Comment continuation in Java
+  autocmd FileType java,c,cpp setlocal comments-=:// comments+=f://
 
-    " Git commit wrapping
-    autocmd FileType gitcommit setlocal tw=72
+  " Git commit wrapping
+  autocmd FileType gitcommit setlocal tw=72
 
-    " Racket
-    autocmd filetypedetect BufReadPost *.rkt,*.rktl,*.rktd set filetype=scheme
+  " Racket
+  autocmd filetypedetect BufReadPost *.rkt,*.rktl,*.rktd set filetype=scheme
+
+  autocmd BufWrite *.cpp,*.cc,*.h,*.hpp,*.c :Autoformat
 endif
 
 " Install vim-plug if not installed
@@ -181,13 +232,22 @@ Plug 'mattn/calendar-vim'
 " goyo
 Plug 'junegunn/goyo.vim'
 
-" vim-ai
-" Plug 'madox2/vim-ai'
-
 " rust.vim
 Plug 'rust-lang/rust.vim'
 
+" coc.nvim
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" vim-autoformat
+Plug 'vim-autoformat/vim-autoformat'
+
+" auto-pairs
+Plug 'jiangmiao/auto-pairs'
+
 call plug#end()
+
+" CONFIGURING COC
+let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-clangd']
 
 " CONFIGURING RUST.VIM
 let g:rustfmt_autosave = 1
@@ -213,9 +273,9 @@ nmap <leader>wt <Plug>VimwikiTabnewLink
 nnoremap <leader>cc :Calendar<CR>
 " Shortcut for today in calendar
 function! OpenCalendarForToday()
-    let l:current_date = strftime('%Y-%m-%d')
-    let l:path_to_today = expand('$HOME/vimwiki/diary/') . l:current_date . '.md'
-    execute 'edit ' . l:path_to_today
+  let l:current_date = strftime('%Y-%m-%d')
+  let l:path_to_today = expand('$HOME/vimwiki/diary/') . l:current_date . '.md'
+  execute 'edit ' . l:path_to_today
 endfunction
 command! OpenCalendarForToday call OpenCalendarForToday()
 nnoremap <leader>ct :OpenCalendarForToday<CR>

@@ -34,6 +34,11 @@ export PATH="$PATH:/Applications/Racket v8.11.1/bin"
 export PATH="$PATH:/opt/homebrew/opt/vim/bin/vim"
 export PATH="$PATH:/opt/apache-maven-3.9.6/bin"
 export PATH="$PATH:$HOME/bin"
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+# LLVM
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
 # superfile
 export EDITOR=vim
