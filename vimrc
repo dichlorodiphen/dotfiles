@@ -1,7 +1,3 @@
-" Comments in Vimscript start with a `"`.
-
-" If you open this file in Vim, it'll be syntax highlighted for you.
-
 " Vim is based on Vi. Setting `nocompatible` switches from the default
 " Vi-compatibility mode and enables useful Vim functionality. This
 " configuration option turns out not to be necessary for the file named
@@ -23,66 +19,14 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<CR>
 
-" ------------------
-" coc-nvim
-" ------------------
-
-" May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
-" utf-8 byte sequence
-set encoding=utf-8
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved
-set signcolumn=yes
-
-" Use tab for trigger completion with characters ahead and navigate
-" NOTE: There's always complete item selected by default, you may want to enable
-" no select by `"suggest.noselect": true` in your configuration file
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" GoTo code navigation
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call ShowDocumentation()<CR>
-
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
-
-" ------------------
+" Create new tab
+noremap <leader>t :tabnew<CR>
 
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
-
-" Create new tab
-noremap <leader>t :tabnew<CR>
 
 " Turn on syntax highlighting.
 syntax on
@@ -191,7 +135,7 @@ if has("autocmd")
   " Racket
   autocmd filetypedetect BufReadPost *.rkt,*.rktl,*.rktd set filetype=scheme
 
-  autocmd BufWrite *.cpp,*.cc,*.h,*.hpp,*.c :Autoformat
+  autocmd BufWrite *.cpp,*.cc,*.h,*.hpp,*.c,*.cxx :Autoformat
 endif
 
 " Install vim-plug if not installed
@@ -205,7 +149,9 @@ endif
 call plug#begin()
 
 " papercolor theme
-Plug 'NLKNguyen/papercolor-theme'
+"Plug 'NLKNguyen/papercolor-theme'
+
+Plug 'cocopon/iceberg.vim'
 
 " vim-go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -244,10 +190,75 @@ Plug 'vim-autoformat/vim-autoformat'
 " auto-pairs
 Plug 'jiangmiao/auto-pairs'
 
+" NERDTree
+Plug 'preservim/nerdtree'
+
+" vim-polyglot
+Plug 'sheerun/vim-polyglot'
+
 call plug#end()
 
-" CONFIGURING COC
+" ------------------
+" coc-nvim
+" ------------------
+
 let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-clangd']
+
+" May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
+" utf-8 byte sequence
+set encoding=utf-8
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" GoTo code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Remap keys for applying code actions at the cursor position
+nmap <leader>aa  <Plug>(coc-codeaction-cursor)
+
+" ------------------
+
+" CONFIGURING NERDTREE
+
+noremap <C-n> :NERDTreeToggle<CR>
+inoremap <C-n> <C-o>:NERDTreeToggle<CR>
 
 " CONFIGURING RUST.VIM
 let g:rustfmt_autosave = 1
@@ -288,8 +299,10 @@ endfunction
 command! Spf call LaunchSuperfile()
 noremap <leader>spf :Spf<CR>
 
-noremap <C-j> :VimwikiToggleListItem<CR>
-inoremap <C-j> <C-o>:VimwikiToggleListItem<CR>
+" TODO: find another key for this, since ctrl-j is used for navigating
+" between splits
+"noremap <C-j> :VimwikiToggleListItem<CR>
+"inoremap <C-j> <C-o>:VimwikiToggleListItem<CR>
 
 " zz shortcut
 inoremap <C-z> <C-o>zz
@@ -304,7 +317,9 @@ let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 set termguicolors
 set background=dark
-colorscheme PaperColor
+colorscheme iceberg
+"highlight clear SignColumn
+"highlight clear LineNr
 
 " goyo shortcuts
 noremap <leader>gg :Goyo<CR>
