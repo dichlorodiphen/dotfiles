@@ -11,6 +11,7 @@ sudo yum install -y gh
 # Copy configs
 cp vimrc ~/.vimrc
 cp zshrc ~/.zshrc
+cp tmux-remote.conf ~/.tmux.conf
 mkdir -p ~/.config/starship
 cp starship.toml ~/.config/starship/starship.toml
 
@@ -34,4 +35,7 @@ nvm install 20
 
 # Install tldr
 npm install -g tldr
+
+# Install tmux
+sudo yum install -y tmux
 
