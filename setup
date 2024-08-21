@@ -39,6 +39,7 @@ npm install -g tldr
 # Install tmux
 sudo yum install -y tmux
 
-# Install cmake and g++
-sudo yum install -y cmake g++
+# Install C/C++ toolchain
+sudo yum install -y cmake g++ clang-tools-extra
+
 
