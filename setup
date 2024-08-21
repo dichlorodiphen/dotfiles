@@ -1,0 +1,37 @@
+#!/bin/env bash
+
+# Silence MOTD
+touch ~/.hushlogin
+
+# Install GH CLI
+type -p yum-config-manager >/dev/null || sudo yum install yum-utils
+sudo yum-config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+sudo yum install -y gh
+
+# Copy configs
+cp vimrc ~/.vimrc
+cp zshrc ~/.zshrc
+mkdir -p ~/.config/starship
+cp starship.toml ~/.config/starship/starship.toml
+
+# Install zsh
+sudo yum install -y zsh
+sudo yum install -y util-linux-user
+sudo chsh -s "$(which zsh)" ec2-user
+
+# Install zoxide
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
+# Install starship
+curl -sS https://starship.rs/install.sh | sudo sh -s -- --yes
+
+# Install node
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+nvm install 20
+
+# Install tldr
+npm install -g tldr
+

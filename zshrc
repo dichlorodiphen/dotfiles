@@ -25,16 +25,17 @@ unset __conda_setup
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
-# zoxide
-eval "$(zoxide init zsh)"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # Path
 export PATH="$PATH:/Applications/Racket v8.11.1/bin"
 export PATH="$PATH:/opt/homebrew/opt/vim/bin/vim"
 export PATH="$PATH:/opt/apache-maven-3.9.6/bin"
 export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.local/bin"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+# zoxide
+eval "$(zoxide init zsh)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # LLVM
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
