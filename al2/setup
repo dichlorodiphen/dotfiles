@@ -36,8 +36,8 @@ nvm install 20
 # Install tldr
 npm install -g tldr
 
-# Install tmux
-sudo yum install -y tmux
+# Install tmux and htop
+sudo yum install -y tmux htop
 
 # Git
 git config --global user.name "David Young"
