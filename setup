@@ -46,7 +46,7 @@ git config --global user.email "dichlorodiphen@gmail.com"
 # Install C/C++ toolchain
 sudo yum install -y cmake g++ clang-tools-extra
 
-# Install Java toolchain
+# Install jenv
 git clone https://github.com/jenv/jenv.git ~/.jenv
 echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.zshrc
 echo 'eval "$(jenv init -)"' >> ~/.zshrc
@@ -54,11 +54,23 @@ echo 'eval "$(jenv init -)"' >> ~/.zshrc
 eval "$(jenv init -)"
 jenv enable-plugin export
 
+# Install Java
 sudo yum install -y java-17-amazon-corretto-devel
 sudo yum install -y java-21-amazon-corretto-devel
 jenv add /usr/lib/jvm/java-17-amazon-corretto.x86_64
 jenv add /usr/lib/jvm/java-21-amazon-corretto.x86_64
 jenv global 17
+
+# Install Gradle
+gradle_version=8.10
+gradle_filename="gradle-${gradle_version}-all.zip"
+if [ ! -d "/opt/gradle" ]; then
+  sudo mkdir /opt/gradle
+  wget -c http://services.gradle.org/distributions/${gradle_filename}
+  sudo unzip -q -d /opt/gradle ${gradle_filename}
+  echo 'export PATH=$PATH:/opt/gradle/gradle-8.10/bin' >> ~/.zshrc
+  rm ${gradle_filename}
+fi
 
 # New shell
 exec $SHELL -l
