@@ -39,7 +39,26 @@ npm install -g tldr
 # Install tmux
 sudo yum install -y tmux
 
+# Git
+git config --global user.name "David Young"
+git config --global user.email "dichlorodiphen@gmail.com"
+
 # Install C/C++ toolchain
 sudo yum install -y cmake g++ clang-tools-extra
 
+# Install Java toolchain
+git clone https://github.com/jenv/jenv.git ~/.jenv
+echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(jenv init -)"' >> ~/.zshrc
+. ~/.zshrc
+eval "$(jenv init -)"
+jenv enable-plugin export
 
+sudo yum install -y java-17-amazon-corretto-devel
+sudo yum install -y java-21-amazon-corretto-devel
+jenv add /usr/lib/jvm/java-17-amazon-corretto.x86_64
+jenv add /usr/lib/jvm/java-21-amazon-corretto.x86_64
+jenv global 17
+
+# New shell
+exec $SHELL -l

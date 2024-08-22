@@ -202,7 +202,7 @@ call plug#end()
 " coc-nvim
 " ------------------
 
-let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-clangd']
+let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-clangd', 'coc-tsserver', 'coc-java']
 
 " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
 " utf-8 byte sequence
