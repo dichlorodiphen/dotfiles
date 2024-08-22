@@ -9,11 +9,11 @@ sudo yum-config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.re
 sudo yum install -y gh
 
 # Copy configs
-cp vimrc ~/.vimrc
-cp zshrc ~/.zshrc
-cp tmux-remote.conf ~/.tmux.conf
+cp ../vimrc ~/.vimrc
+cp ../zshrc ~/.zshrc
+cp ../tmux-remote.conf ~/.tmux.conf
 mkdir -p ~/.config/starship
-cp starship.toml ~/.config/starship/starship.toml
+cp ../starship.toml ~/.config/starship/starship.toml
 
 # Install zsh
 sudo yum install -y zsh
@@ -68,9 +68,13 @@ if [ ! -d "/opt/gradle" ]; then
   sudo mkdir /opt/gradle
   wget -c http://services.gradle.org/distributions/${gradle_filename}
   sudo unzip -q -d /opt/gradle ${gradle_filename}
-  echo 'export PATH=$PATH:/opt/gradle/gradle-8.10/bin' >> ~/.zshrc
+  echo 'export GRADLE_HOME=/opt/gradle/gradle-8.10' >> ~/.zshrc
+  echo 'export PATH=$PATH:$GRADLE_HOME/bin' >> ~/.zshrc
   rm ${gradle_filename}
 fi
+
+# Set up coc.nvim
+cp coc-settings.json ~/.vim/coc-settings.json
 
 # New shell
 exec $SHELL -l
