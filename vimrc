@@ -19,6 +19,9 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<CR>
 
+" vimrc commands
+noremap _v :e $MYVIMRC<CR>
+
 " Create new tab
 noremap <leader>t :tabnew<CR>
 
@@ -259,24 +262,32 @@ nmap <leader>aa  <Plug>(coc-codeaction-cursor)
 
 noremap <C-n> :NERDTreeToggle<CR>
 inoremap <C-n> <C-o>:NERDTreeToggle<CR>
+let g:NERDTreeCaseSensitiveFS = 3
+
+" CONFIGURING AUTOPAIRS
+
+let g:AutoPairsShortcutToggle = '<C-p>'
 
 " CONFIGURING RUST.VIM
 let g:rustfmt_autosave = 1
 
 " CONFIGURING FZF.VIM
+
+nnoremap <silent> <expr> <leader>ss (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZF\<cr>"
+
 " Use fd for fzf
 " NOTE: I don't use fzf for anything other than vimwiki search right now. Must
 " set up a better system for ignores if I do.
 let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow -E .git -E backups -E "*.swp" -E .gitignore'
 " Search vimwiki
-function! VimwikiFzfSearch()
+function! FzfSearch()
   let l:wiki_path = expand('$HOME/vimwiki')
   call fzf#vim#files(l:wiki_path)
 endfunction
-command! VimwikiFzfSearch call VimwikiFzfSearch()
-nnoremap <leader>ws :VimwikiFzfSearch<CR>
+command! FzfSearch call FzfSearch()
+nnoremap <leader>ws :FzfSearch<CR>
 " Follow link in new tab
-nmap <leader>wt <Plug>VimwikiTabnewLink
+" nmap <leader>wt <Plug>VimwikiTabnewLink
 " disable <leader>ws in vimwiki
 " nmap <F15> <Plug>VimwikiUISelect
 
