@@ -278,7 +278,7 @@ nnoremap <silent> <expr> <leader>ss (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>"
 " Use fd for fzf
 " NOTE: I don't use fzf for anything other than vimwiki search right now. Must
 " set up a better system for ignores if I do.
-let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow -E .git -E backups -E "*.swp" -E .gitignore'
+let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow -E .git -E backups -E "*.swp" -E .gitignore -E build/ -E .cache/'
 " Search vimwiki
 function! FzfSearch()
   let l:wiki_path = expand('$HOME/vimwiki')
