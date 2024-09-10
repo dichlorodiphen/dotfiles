@@ -152,7 +152,7 @@ endif
 call plug#begin()
 
 " papercolor theme
-"Plug 'NLKNguyen/papercolor-theme'
+Plug 'NLKNguyen/papercolor-theme'
 
 Plug 'cocopon/iceberg.vim'
 
@@ -331,6 +331,11 @@ set background=dark
 colorscheme iceberg
 "highlight clear SignColumn
 "highlight clear LineNr
+
+" custom colorscheme in vimdiff
+if &diff
+    colorscheme papercolor
+endif
 
 " goyo shortcuts
 noremap <leader>gg :Goyo<CR>
