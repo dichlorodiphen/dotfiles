@@ -1,0 +1,19 @@
+[user]
+	name = David Young
+	email = dhyoung@amazon.com
+[pull]
+	rebase = true
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+	conflictstyle = zdiff3
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true    # use n and N to move between diff sections
+	line-numbers = true
+	side-by-side = true
+
