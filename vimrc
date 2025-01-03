@@ -151,8 +151,11 @@ endif
 " VIM-PLUG
 call plug#begin()
 
-" papercolor theme
-Plug 'NLKNguyen/papercolor-theme'
+" lualine
+Plug 'nvim-lualine/lualine.nvim'
+
+" tokyonight
+Plug 'folke/tokyonight.nvim'
 
 Plug 'cocopon/iceberg.vim'
 
@@ -205,7 +208,7 @@ call plug#end()
 " coc-nvim
 " ------------------
 
-let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-clangd', 'coc-tsserver', 'coc-java']
+let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-clangd']
 
 " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
 " utf-8 byte sequence
@@ -328,7 +331,8 @@ let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 set termguicolors
 set background=dark
-colorscheme iceberg
+colorscheme tokyonight-night
+hi CocInlayHint guifg=#7E7E7E guibg=NONE
 "highlight clear SignColumn
 "highlight clear LineNr
 
@@ -344,43 +348,3 @@ noremap <leader>gg :Goyo<CR>
 let g:vimwiki_list = [{'path': '~/vimwiki/',
       \ 'syntax': 'markdown', 'ext': '.md'}]
 
-" OCaml
-" :set rtp+=/Users/dichlorodiphen/.opam/4.14.0/share/merlin/vim
-
-" ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
-let s:opam_share_dir = system("opam config var share")
-let s:opam_share_dir = substitute(s:opam_share_dir, '[\r\n]*$', '', '')
-
-let s:opam_configuration = {}
-
-function! OpamConfOcpIndent()
-  execute "set rtp^=" . s:opam_share_dir . "/ocp-indent/vim"
-endfunction
-let s:opam_configuration['ocp-indent'] = function('OpamConfOcpIndent')
-
-function! OpamConfOcpIndex()
-  execute "set rtp+=" . s:opam_share_dir . "/ocp-index/vim"
-endfunction
-let s:opam_configuration['ocp-index'] = function('OpamConfOcpIndex')
-
-function! OpamConfMerlin()
-  let l:dir = s:opam_share_dir . "/merlin/vim"
-  execute "set rtp+=" . l:dir
-endfunction
-let s:opam_configuration['merlin'] = function('OpamConfMerlin')
-
-let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
-let s:opam_available_tools = []
-for tool in s:opam_packages
-  " Respect package order (merlin should be after ocp-index)
-  if isdirectory(s:opam_share_dir . "/" . tool)
-    call add(s:opam_available_tools, tool)
-    call s:opam_configuration[tool]()
-  endif
-endfor
-" ## end of OPAM user-setup addition for vim / base ## keep this line
-" ## added by OPAM user-setup for vim / ocp-indent ## 479a17575ac219cabc549d0acb50c0e8 ## you can edit, but keep this line
-if count(s:opam_available_tools,"ocp-indent") == 0
-  source "/Users/dichlorodiphen/.opam/default/share/ocp-indent/vim/indent/ocaml.vim"
-endif
-" ## end of OPAM user-setup addition for vim / ocp-indent ## keep this line
