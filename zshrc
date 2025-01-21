@@ -6,6 +6,12 @@ export PROMPT="%F{green}%n%f%F{green}@%F{green}%m%f%F{white}:%F{blue}%~%F{white}
 # Colorize ls output
 alias ls='ls --color=auto'
 
+# Vim -> Neovim
+alias vim='nvim'
+
+# Configure less with better defaults
+export LESS='-Rij.5'
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/Users/dichlorodiphen/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
