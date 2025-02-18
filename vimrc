@@ -141,69 +141,6 @@ if has("autocmd")
   autocmd BufWrite *.cpp,*.cc,*.h,*.hpp,*.c,*.cxx :Autoformat
 endif
 
-" Install vim-plug if not installed
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-" VIM-PLUG
-call plug#begin()
-
-" lualine
-Plug 'nvim-lualine/lualine.nvim'
-
-" tokyonight
-Plug 'folke/tokyonight.nvim'
-
-Plug 'cocopon/iceberg.vim'
-
-" vim-go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-" vimwiki
-Plug 'vimwiki/vimwiki'
-
-" TOML syntax highlighting
-Plug 'cespare/vim-toml', { 'branch': 'main' }
-
-" nand2tetris syntax
-Plug 'sevko/vim-nand2tetris-syntax'
-
-" neoformat (for ocamlformat)
-Plug 'sbdchd/neoformat'
-
-" fzf.vim
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-" calendar-vim
-Plug 'mattn/calendar-vim'
-
-" goyo
-Plug 'junegunn/goyo.vim'
-
-" rust.vim
-Plug 'rust-lang/rust.vim'
-
-" coc.nvim
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" vim-autoformat
-Plug 'vim-autoformat/vim-autoformat'
-
-" auto-pairs
-Plug 'jiangmiao/auto-pairs'
-
-" NERDTree
-Plug 'preservim/nerdtree'
-
-" vim-polyglot
-Plug 'sheerun/vim-polyglot'
-
-call plug#end()
-
 " ------------------
 " coc-nvim
 " ------------------
@@ -261,6 +198,10 @@ nmap <leader>aa  <Plug>(coc-codeaction-cursor)
 
 " ------------------
 
+" CONFIGURING COPILOT
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
+
 " CONFIGURING NERDTREE
 
 noremap <C-n> :NERDTreeToggle<CR>
@@ -289,21 +230,6 @@ function! FzfSearch()
 endfunction
 command! FzfSearch call FzfSearch()
 nnoremap <leader>ws :FzfSearch<CR>
-" Follow link in new tab
-" nmap <leader>wt <Plug>VimwikiTabnewLink
-" disable <leader>ws in vimwiki
-" nmap <F15> <Plug>VimwikiUISelect
-
-" Shortcut for calendar
-nnoremap <leader>cc :Calendar<CR>
-" Shortcut for today in calendar
-function! OpenCalendarForToday()
-  let l:current_date = strftime('%Y-%m-%d')
-  let l:path_to_today = expand('$HOME/vimwiki/diary/') . l:current_date . '.md'
-  execute 'edit ' . l:path_to_today
-endfunction
-command! OpenCalendarForToday call OpenCalendarForToday()
-nnoremap <leader>ct :OpenCalendarForToday<CR>
 
 " Superfile shortcut
 function! LaunchSuperfile()
