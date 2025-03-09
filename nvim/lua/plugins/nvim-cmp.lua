@@ -1,6 +1,6 @@
 return {
   "hrsh7th/nvim-cmp",
-  event = "InsertEnter",
+  event = "BufWinEnter",
   dependencies = {
     "neovim/nvim-lspconfig",
     "hrsh7th/cmp-nvim-lsp",
@@ -12,7 +12,7 @@ return {
   },
   opts = function ()
     -- Set up nvim-cmp.
-    local cmp = require'cmp'
+    local cmp = require("cmp")
 
     cmp.setup({
       snippet = {
@@ -56,8 +56,29 @@ return {
       matching = { disallow_symbol_nonprefix_matching = false }
     })
 
+    -- Add border to hover boxes
+    local cmp_window = require("cmp.config.window")
+    cmp.setup({
+      window = {
+        completion = cmp_window.bordered(),
+        documentation = cmp_window.bordered(),
+      },
+    })
+
     -- Setting up lspconfig
-    require("lspconfig").jdtls.setup{}
+    local lspconfig = require("lspconfig")
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    lspconfig.jdtls.setup{
+      capabilities = capabilities,
+    }
+    lspconfig.gopls.setup{
+      capabilities = capabilities,
+    }
+    lspconfig.lua_ls.setup{
+      capabilities = capabilities,
+    }
+
+    vim.api.nvim_exec_autocmds("FileType", {})
   end
 }
 
