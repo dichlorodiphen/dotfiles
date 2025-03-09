@@ -12,8 +12,10 @@ vim.opt.shortmess:append("ltToOCF")
 
 ---
 
-local function nset (...)
-  return vim.keymap.set("n", ...)
+local function nset (from, to, opts)
+  local defaultOpts = { silent = true }
+  opts = vim.tbl_extend("force", defaultOpts, opts or {})
+  return vim.keymap.set("n", from, to, opts)
 end
 
 -- Tab shortcuts
@@ -27,11 +29,31 @@ nset("<leader>6", "6gt")
 nset("<leader>7", "7gt")
 nset("<leader>8", "8gt")
 nset("<leader>9", "9gt")
-nset("<leader>t", ":tabnew<CR>")
+nset("<leader>t", ":tabnew<cr>")
 
 -- Split navigation
-nset("<c-k>", ":wincmd k<CR>", {silent = true})
-nset("<c-j>", ":wincmd j<CR>", {silent = true})
-nset("<c-h>", ":wincmd h<CR>", {silent = true})
-nset("<c-l>", ":wincmd l<CR>", {silent = true})
+nset("<c-k>", ":wincmd k<cr>")
+nset("<c-j>", ":wincmd j<cr>")
+nset("<c-h>", ":wincmd h<cr>")
+nset("<c-l>", ":wincmd l<cr>")
+
+-- qfl
+nset("<leader>qn", ":cnext<cr>")
+nset("<leader>qp", ":cprev<cr>")
+nset("<leader>qc", ":cexpr []<cr>")
+nset("<leader>qf", function ()
+  local id = vim.fn.win_getid()
+  if id == 0 then
+    vim.notify("Could not get ID for current window and tab.", vim.log.levels.WARN)
+    return
+  end
+
+  local win = vim.fn.getwininfo(id)[1]
+  if win.quickfix == 1 then
+    vim.cmd("cclose")
+    return
+  end
+
+  vim.cmd("copen")
+end)
 
