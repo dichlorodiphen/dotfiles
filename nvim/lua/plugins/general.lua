@@ -21,12 +21,29 @@ return {
     },
   },
   {
-    "nvim-telescope/telescope.nvim", tag = "0.1.8",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim"
+    },
+    config = function ()
+      require("telescope").load_extension("file_browser")
+    end,
+    keys = {
+      { "<leader>fb", "<cmd>Telescope file_browser<cr>" },
+    }
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.8",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
     keys = {
       { "<leader>fs", "<cmd>Telescope find_files<cr>" },
       { "<leader>fg", "<cmd>Telescope live_grep<cr>" },
-      { "<leader>fb", "<cmd>Telescope buffers<cr>" },
+      { "<leader>bb", "<cmd>Telescope buffers<cr>" },
       { "<leader>fh", "<cmd>Telescope help_tags<cr>" },
     },
     opts = {}
@@ -34,7 +51,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = function ()
-        require("nvim-treesitter.install").update({ with_sync = true })()
+      require("nvim-treesitter.install").update({ with_sync = true })()
     end,
   },
 }
