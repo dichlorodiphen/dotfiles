@@ -9,6 +9,7 @@ vim.opt.smartindent = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.shortmess:append("ltToOCF")
+vim.opt.cursorline = true
 
 ---
 

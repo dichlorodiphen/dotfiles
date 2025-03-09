@@ -46,7 +46,7 @@ return {
       { "<leader>bb", "<cmd>Telescope buffers<cr>" },
       { "<leader>fh", "<cmd>Telescope help_tags<cr>" },
     },
-    opts = {}
+    opts = {},
   },
   {
     "nvim-treesitter/nvim-treesitter",
