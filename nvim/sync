@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+cd ..
+cp -r nvim/ ~/.config/nvim/
+rm ~/.config/nvim/sync
+cd - &> /dev/null
+tree ~/.config/nvim

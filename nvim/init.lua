@@ -1,3 +1,11 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+require("config.keymap")
+require("config.autocmd")
+require("config.lazy")
+
+--[[
 vim.cmd [[
   " Install vim-plug if not installed
   let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -29,27 +37,18 @@ vim.cmd [[
   Plug 'sheerun/vim-polyglot'
   call plug#end()
 ]]
+--]]
 
-vim.cmd('source /Users/dhyoung/.vimrc')
+--vim.cmd('source /Users/dhyoung/.vimrc')
 
-vim.opt.shortmess = {
-  o = true
-}
-
--- Copilot
-require("CopilotChat").setup {
-  -- See Configuration section for options
-}
-vim.g.copilot_enabled = false
+vim.opt.shortmess:append("ltToOCF")
 
 -- Lualine
+--[[
 require('lualine').setup {
   options = {
     theme = 'tokyonight'
   }
 }
-
--- Keybindings
-vim.api.nvim_set_keymap('n', '<leader>cc', ':CopilotChat<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<leader>cc', ':CopilotChat<CR>', { noremap = true, silent = true })
+--]]
 
