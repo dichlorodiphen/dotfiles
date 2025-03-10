@@ -105,6 +105,7 @@ return {
 
       lspconfig.jdtls.setup {
         capabilities = capabilities,
+        settings = require("plugins.lsp.lang.java"),
       }
 
       lspconfig.gopls.setup {

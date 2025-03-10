@@ -39,6 +39,9 @@ export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
+# Used by nvim jdtls
+export JDTLS_JVM_ARGS="-javaagent:$HOME/.local/share/java/lombok.jar"
+
 # zoxide
 eval "$(zoxide init zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
