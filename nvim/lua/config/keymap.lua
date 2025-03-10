@@ -2,6 +2,7 @@
 -- TODO: Move to another file if this gets unmanageable
 vim.opt.compatible = false
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
