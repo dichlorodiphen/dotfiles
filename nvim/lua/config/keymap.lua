@@ -58,3 +58,8 @@ nset("<leader>qf", function ()
   vim.cmd("copen")
 end)
 
+-- Toggle inlay hints
+nset("<leader>lh", function ()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end)
+

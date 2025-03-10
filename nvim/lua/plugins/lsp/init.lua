@@ -34,7 +34,16 @@ return {
       "hrsh7th/cmp-vsnip",
       "hrsh7th/vim-vsnip",
     },
-    opts = function ()
+    opts = function()
+      -- Related configuration (TODO: refactor this file)
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+        border = "rounded",
+      })
+      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+        border = "rounded",
+      })
+      vim.lsp.inlay_hint.enable(true)
+
       -- Set up nvim-cmp.
       local cmp = require("cmp")
 
@@ -52,16 +61,16 @@ return {
           ['<CR>'] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources(
-        {
-          { name = 'nvim_lsp' },
-          { name = 'vsnip' },
-        },
-        {
-          { name = 'buffer' },
-        },
-        {
-          { name = "nvim_lsp_signature_help" },
-        })
+          {
+            { name = 'nvim_lsp' },
+            { name = 'vsnip' },
+          },
+          {
+            { name = 'buffer' },
+          },
+          {
+            { name = "nvim_lsp_signature_help" },
+          })
       })
 
       -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
@@ -85,18 +94,19 @@ return {
 
       -- Setting up lspconfig
       local lspconfig = require("lspconfig")
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      lspconfig.jdtls.setup{
+      lspconfig.jdtls.setup {
         capabilities = capabilities,
       }
 
-      lspconfig.gopls.setup{
+      lspconfig.gopls.setup {
         capabilities = capabilities,
       }
 
-      lspconfig.ts_ls.setup{
+      lspconfig.ts_ls.setup {
         capabilities = capabilities,
+        settings = require("plugins.lsp.lang.ts"),
       }
 
       lspconfig.lua_ls.setup {
@@ -104,7 +114,7 @@ return {
         on_init = function(client)
           if client.workspace_folders then
             local path = client.workspace_folders[1].name
-            if path ~= vim.fn.stdpath('config') and (vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc')) then
+            if path ~= vim.fn.stdpath('config') and (vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc')) then
               return
             end
           end
@@ -129,13 +139,7 @@ return {
             }
           })
         end,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            },
-          }
-        }
+        settings = require("plugins.lsp.lang.lua")
       }
 
       -- Retrigger FileType autocmds to start language servers. Necessary because we load nvim-cmp after FileType.
@@ -143,4 +147,3 @@ return {
     end
   }
 }
-
