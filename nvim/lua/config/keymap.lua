@@ -10,6 +10,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.shortmess:append("ltToOCF")
 vim.opt.cursorline = true
+vim.opt.signcolumn = "yes"
 
 ---
 

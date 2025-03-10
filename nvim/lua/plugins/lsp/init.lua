@@ -102,6 +102,7 @@ return {
 
       lspconfig.gopls.setup {
         capabilities = capabilities,
+        settings = require("plugins.lsp.lang.go"),
       }
 
       lspconfig.ts_ls.setup {
