@@ -1,15 +1,12 @@
 return {
   {
     "folke/tokyonight.nvim",
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
-    config = function ()
+    config = function()
       -- load the colorscheme here
       vim.cmd("colorscheme tokyonight")
     end,
-  },
-  {
-    "jiangmiao/auto-pairs"
   },
   {
     "nvim-lualine/lualine.nvim",
@@ -26,7 +23,7 @@ return {
       "nvim-telescope/telescope.nvim",
       "nvim-lua/plenary.nvim"
     },
-    config = function ()
+    config = function()
       require("telescope").load_extension("file_browser")
     end,
     keys = {
@@ -50,8 +47,18 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    build = function ()
+    build = function()
       require("nvim-treesitter.install").update({ with_sync = true })()
     end,
   },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = function()
+      -- If you want insert `(` after select function or method item
+      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+      local cmp = require('cmp')
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+    end
+  }
 }
