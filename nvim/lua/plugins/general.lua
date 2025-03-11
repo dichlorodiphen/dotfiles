@@ -47,6 +47,14 @@ return {
       defaults = {
         path_display = { "truncate" },
       },
+      extensions = {
+        file_browser = {
+          display_stat = false,
+          depth = 3,
+          collapse_dirs = true,
+          grouped = true,
+        },
+      },
     },
   },
   {
