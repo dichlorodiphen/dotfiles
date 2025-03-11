@@ -20,6 +20,7 @@ return {
         "ts_ls",
         "clangd",
         "bashls",
+        "nil_ls",
       }
     },
   },
@@ -126,6 +127,11 @@ return {
       }
 
       lspconfig.bashls.setup {
+        capabilities = capabilities,
+        settings = require("plugins.lsp.lang.bash"),
+      }
+
+      lspconfig.nil_ls.setup {
         capabilities = capabilities,
         settings = require("plugins.lsp.lang.bash"),
       }
