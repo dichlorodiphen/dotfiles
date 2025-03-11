@@ -18,6 +18,7 @@ return {
         "gopls",
         "jdtls",
         "ts_ls",
+        "clangd",
       }
     },
   },
@@ -116,6 +117,11 @@ return {
       lspconfig.ts_ls.setup {
         capabilities = capabilities,
         settings = require("plugins.lsp.lang.ts"),
+      }
+
+      lspconfig.clangd.setup {
+        capabilities = capabilities,
+        settings = require("plugins.lsp.lang.cpp"),
       }
 
       lspconfig.lua_ls.setup {
