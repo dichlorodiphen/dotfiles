@@ -19,6 +19,7 @@ return {
         "jdtls",
         "ts_ls",
         "clangd",
+        "bashls",
       }
     },
   },
@@ -122,6 +123,11 @@ return {
       lspconfig.clangd.setup {
         capabilities = capabilities,
         settings = require("plugins.lsp.lang.cpp"),
+      }
+
+      lspconfig.bashls.setup {
+        capabilities = capabilities,
+        settings = require("plugins.lsp.lang.bash"),
       }
 
       lspconfig.lua_ls.setup {
