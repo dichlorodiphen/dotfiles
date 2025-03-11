@@ -43,7 +43,11 @@ return {
       { "<leader>bb", "<cmd>Telescope buffers<cr>" },
       { "<leader>fh", "<cmd>Telescope help_tags<cr>" },
     },
-    opts = {},
+    opts = {
+      defaults = {
+        path_display = { "truncate" },
+      },
+    },
   },
   {
     "nvim-treesitter/nvim-treesitter",
