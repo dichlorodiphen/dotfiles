@@ -12,6 +12,11 @@ autocmd("FileType", {
   command = "setlocal noexpandtab softtabstop=0 syntax=nasm",
 })
 
+autocmd("FileType", {
+  pattern = {"java", "groovy"},
+  command = "setlocal tabstop=4 shiftwidth=4",
+})
+
 -- Git commit line-length limit
 autocmd("FileType", {
   pattern = "gitcommit",
