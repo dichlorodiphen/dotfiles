@@ -76,7 +76,20 @@ return {
   {
     "aznhe21/actions-preview.nvim",
     keys = {
-      { "<leader>aa", function () require("actions-preview").code_actions() end },
+      { "<leader>aa", function() require("actions-preview").code_actions() end },
     },
   },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      format_on_save = {
+        -- These options will be passed to conform.format()
+        timeout_ms = 500,
+        lsp_format = "fallback",
+      },
+      formatters_by_ft = {
+        lua = { "stylua" },
+      },
+    },
+  }
 }
