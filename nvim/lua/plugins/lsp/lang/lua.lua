@@ -1,10 +1,10 @@
 return {
-  Lua = {
-    diagnostics = {
-      globals = { "vim" },
-    },
-    hint = {
-      enable = true,
-    },
-  },
+	Lua = {
+		diagnostics = {
+			globals = { "vim" },
+		},
+		hint = {
+			enable = true,
+		},
+	},
 }
