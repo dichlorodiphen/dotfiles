@@ -96,6 +96,7 @@ return {
 				lua = { "stylua" },
 				go = { "gofmt" },
 				cpp = { "clang-format" },
+				haskell = { "ormolu" },
 			},
 		},
 	},

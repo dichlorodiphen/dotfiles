@@ -133,6 +133,11 @@ return {
 				settings = require("plugins.lsp.lang.bash"),
 			})
 
+			lspconfig.hls.setup({
+				capabilities = capabilities,
+				settings = require("plugins.lsp.lang.haskell"),
+			})
+
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 				on_init = function(client)
