@@ -100,4 +100,7 @@ return {
 			},
 		},
 	},
+	{
+		"dijkstracula/vim-plang",
+	},
 }
