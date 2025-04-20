@@ -42,6 +42,7 @@ return {
 			{ "<leader>fg", "<cmd>Telescope live_grep<cr>" },
 			{ "<leader>bb", "<cmd>Telescope buffers<cr>" },
 			{ "<leader>fh", "<cmd>Telescope help_tags<cr>" },
+			{ "<leader>fd", "<cmd>Telescope diagnostics<cr>" },
 		},
 		opts = {
 			defaults = {
