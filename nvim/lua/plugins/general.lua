@@ -104,4 +104,7 @@ return {
 	{
 		"dijkstracula/vim-plang",
 	},
+	{
+		"glochtefeld/lox.vim",
+	},
 }
