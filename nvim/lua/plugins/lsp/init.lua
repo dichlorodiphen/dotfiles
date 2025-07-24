@@ -14,13 +14,14 @@ return {
 		},
 		opts = {
 			ensure_installed = {
-				"lua_ls",
+				"bashls",
+				"clangd",
 				"gopls",
 				"jdtls",
-				"ts_ls",
-				"clangd",
-				"bashls",
+				"lua_ls",
 				"nil_ls",
+				"ts_ls",
+				"pyright",
 			},
 		},
 	},
@@ -143,6 +144,11 @@ return {
 			lspconfig.hls.setup({
 				capabilities = capabilities,
 				settings = require("plugins.lsp.lang.haskell"),
+			})
+
+			lspconfig.pyright.setup({
+				capabilities = capabilities,
+				settings = require("plugins.lsp.lang.python"),
 			})
 
 			lspconfig.lua_ls.setup({
