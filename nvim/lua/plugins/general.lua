@@ -98,6 +98,7 @@ return {
 				go = { "gofmt" },
 				cpp = { "clang-format" },
 				haskell = { "ormolu" },
+				python = { "ruff_format" },
 			},
 		},
 	},
