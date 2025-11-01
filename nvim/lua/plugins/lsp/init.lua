@@ -107,50 +107,49 @@ return {
       })
 
       -- Setting up lspconfig
-      local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      lspconfig.jdtls.setup({
+      vim.lsp.config('jdtls', {
         capabilities = capabilities,
         settings = require("plugins.lsp.lang.java"),
       })
 
-      lspconfig.gopls.setup({
+      vim.lsp.config('gopls', {
         capabilities = capabilities,
         settings = require("plugins.lsp.lang.go"),
       })
 
-      lspconfig.ts_ls.setup({
+      vim.lsp.config('ts_ls', {
         capabilities = capabilities,
         settings = require("plugins.lsp.lang.ts"),
       })
 
-      lspconfig.clangd.setup({
+      vim.lsp.config('clangd', {
         capabilities = capabilities,
         settings = require("plugins.lsp.lang.cpp"),
       })
 
-      lspconfig.bashls.setup({
+      vim.lsp.config('bashls', {
         capabilities = capabilities,
         settings = require("plugins.lsp.lang.bash"),
       })
 
-      lspconfig.nil_ls.setup({
+      vim.lsp.config('nil_ls', {
         capabilities = capabilities,
         settings = require("plugins.lsp.lang.bash"),
       })
 
-      lspconfig.hls.setup({
+      vim.lsp.config('hls', {
         capabilities = capabilities,
         settings = require("plugins.lsp.lang.haskell"),
       })
 
-      lspconfig.pyright.setup({
+      vim.lsp.config('pyright', {
         capabilities = capabilities,
         settings = require("plugins.lsp.lang.python"),
       })
 
-      lspconfig.lua_ls.setup({
+      vim.lsp.config('lua_ls', {
         capabilities = capabilities,
         on_init = function(client)
           if client.workspace_folders then
